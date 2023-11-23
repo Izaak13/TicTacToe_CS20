@@ -7,6 +7,7 @@ float gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight;
 float bottomButtonX, bottomButtonY, bottomButtonWidth, bottomButtonHeight;
 float topButtonX, topButtonY, topButtonWidth, topButtonHeight;
 float restartX, restartY, restartWidth, restartHeight;
+float teamWidth, teamHeight;
 //
 void setup() {
   //Display, based on google tic tac toe
@@ -32,6 +33,8 @@ void setup() {
   restartY = smallDimension*26/30;
   restartWidth = appWidth*1/3;
   restartHeight = smallDimension*3/30;
+  teamWidth = appWidth*1/10;
+  teamHeight = teamWidth;
   //
   //DIVs
   rect(gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight); //gameSpace
@@ -39,7 +42,10 @@ void setup() {
   rect(topButtonX, topButtonY, topButtonWidth, topButtonHeight); //topButtons:
   fill(#B9B6B6);
   rect(restartX, restartY, restartWidth, restartHeight);
-  //rect(team1X, team1Y, team1Width, team1Height);
+  rect(appWidth*1/20, appHeight*9/20, teamWidth, teamHeight);
+  rect(appWidth*17/20, appHeight*9/20, teamWidth, teamHeight);
+  rect(appWidth*3/8, appHeight*1/3, appWidth*1/4, appWidth*1/4); //board
+  rect(appWidth*3/8, appHeight*1/3, appWidth*1/4, appWidth*1/4); 
   //
 } //End setup
 //

@@ -7,14 +7,23 @@ float gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight;
 float bottomButtonX, bottomButtonY, bottomButtonWidth, bottomButtonHeight;
 float topButtonX, topButtonY, topButtonWidth, topButtonHeight;
 float restartX, restartY, restartWidth, restartHeight;
-float teamWidth, teamHeight;
+float teamWidth, teamHeight, widthSquare, heightSquare;
+int bestOf;
+//text variables
+String restart = "RESTART";
+String bestOfText = "Best Of: ";
 //
 void setup() {
+  //
+  textSetup();
+  //
   //Display
   size(600, 400);
   appWidth = width; //display width
   appHeight = height; //display height
   smallDimension = ( appWidth < appHeight ) ? appWidth : appHeight;
+  widthSquare = appHeight*1/4;
+  heightSquare = widthSquare;
   //
   //population
   gameSpaceX = appWidth*0;
@@ -37,8 +46,9 @@ void setup() {
   teamHeight = teamWidth;
   //
   //DIVs
+  fill(#FF8F1F);
   rect(gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight); //gameSpace
-  fill(#B9B6B6);
+  fill(#FAE079);
   rect(restartX, restartY, restartWidth, restartHeight); //restart
   rect(appWidth*11/20, appHeight*1/20, teamWidth, teamHeight);
   rect(appWidth*11/20, appHeight*16/20, teamWidth, teamHeight);
@@ -58,7 +68,13 @@ void setup() {
   //
 } //End setup
 //
-void draw() {} //End setup
+void draw() {
+  board();
+  //text
+  textDrawMedium(black, CENTER, CENTER, font, restart, restartX, restartY-appHeight*1/100, restartWidth, restartHeight);
+  textDrawMedSmall(black, CENTER, CENTER, font, bestOfText+String.valueOf(bestOf), restartX, smallDimension*3/5, restartWidth, restartHeight);
+
+} //End draw
 //
 void mousePressed() {} //End mousePressed
 //

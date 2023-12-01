@@ -9,6 +9,7 @@ float topButtonX, topButtonY, topButtonWidth, topButtonHeight;
 float restartX, restartY, restartWidth, restartHeight;
 float teamWidth, teamHeight, widthSquare, heightSquare;
 int bestOf;
+boolean bestOfSelection = false;
 //text variables
 String restart = "RESTART";
 String bestOfText = "Best Of: ";
@@ -45,6 +46,11 @@ void setup() {
   teamWidth = appWidth*1/10;
   teamHeight = teamWidth;
   //
+} //End setup
+//
+void draw() {
+  board();
+  //
   //DIVs
   fill(#FF8F1F);
   rect(gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight); //gameSpace
@@ -55,28 +61,41 @@ void setup() {
   rect(appWidth*1.06/2, appHeight*1/4, appHeight*1/2, appHeight*1/2); //board 
   rect(restartX, smallDimension*3/5, restartWidth, restartHeight); //change match style
   rect(appWidth*1.5/10, appHeight*1/12, appWidth*1/10, appWidth*1/10); //crown icon
-    rect(appWidth*1.35/10, appHeight*5.5/20, appWidth*1/30, appWidth*1/30);//win dots
-    rect(appWidth*1.35/10, appHeight*7/20, appWidth*1/30, appWidth*1/30);
-    rect(appWidth*1.35/10, appHeight*8.5/20, appWidth*1/30, appWidth*1/30);
-    rect(appWidth*2.3/10, appHeight*5.5/20, appWidth*1/30, appWidth*1/30);
-    rect(appWidth*2.3/10, appHeight*7/20, appWidth*1/30, appWidth*1/30);
-    rect(appWidth*2.3/10, appHeight*8.5/20, appWidth*1/30, appWidth*1/30);
+  rect(appWidth*1.35/10, appHeight*5.5/20, appWidth*1/30, appWidth*1/30);//win dots
+  rect(appWidth*1.35/10, appHeight*7/20, appWidth*1/30, appWidth*1/30);
+  rect(appWidth*1.35/10, appHeight*8.5/20, appWidth*1/30, appWidth*1/30);
+  rect(appWidth*2.3/10, appHeight*5.5/20, appWidth*1/30, appWidth*1/30);
+  rect(appWidth*2.3/10, appHeight*7/20, appWidth*1/30, appWidth*1/30);
+  rect(appWidth*2.3/10, appHeight*8.5/20, appWidth*1/30, appWidth*1/30);
   rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player 1 title
   rect(appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20); //player 2 title
   rect(appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25); //player 1
   rect(appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25); //player 2
-  //
-} //End setup
-//
-void draw() {
-  board();
   //text
   textDrawMedium(black, CENTER, CENTER, font, restart, restartX, restartY-appHeight*1/100, restartWidth, restartHeight);
   textDrawMedSmall(black, CENTER, CENTER, font, bestOfText+String.valueOf(bestOf), restartX, smallDimension*3/5, restartWidth, restartHeight);
-
+  textDrawMedSmall(black, CENTER, CENTER, font, bestOfText+String.valueOf(bestOf), restartX, smallDimension*3/5, restartWidth, restartHeight);
+  //
+  if ( bestOfSelection == true )
+  {
+    rect(restartX, smallDimension*3/5+restartHeight, restartWidth, restartHeight);
+    rect(restartX, smallDimension*3/5+restartHeight*2, restartWidth, restartHeight);
+    rect(restartX, smallDimension*3/5+restartHeight*3, restartWidth, restartHeight);
+    rect(restartX, smallDimension*3/5+restartHeight*4, restartWidth, restartHeight);
+  }
+  //
 } //End draw
 //
-void mousePressed() {} //End mousePressed
+void mousePressed() {
+  if ( mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*3/5 && mouseY<smallDimension*3/5+restartHeight)
+  {
+    bestOfSelection = true;
+  }
+  else
+  {
+    bestOfSelection = false;
+  }
+} //End mousePressed
 //
 void keyPressed() {}//End keyPressed
 //

@@ -11,7 +11,10 @@ float teamWidth, teamHeight, widthSquare, heightSquare;
 int bestOf;
 boolean bestOfSelection = false;
 boolean x1 = false, x2 = false, x3 = false, x4 = false, x5 = false, x6 = false, x7 = false, x8 = false, x9;
-PImage x;
+boolean o1 = false, o2 = false, o3 = false, o4 = false, o5 = false, o6 = false, o7 = false, o8 = false, o9;
+boolean s1 = false, s2 = false, s3 = false, s4 = false, s5 = false, s6 = false, s7 = false, s8 = false, s9;
+PImage x, o;
+int turn = 1;
 //PImage o = loadImage("../TicTacToe Images/o.png");
 //text variables
 String restart = "RESTART";
@@ -30,6 +33,7 @@ void setup() {
   heightSquare = widthSquare;
   //
   x = loadImage("../TicTacToe Images/x.png");
+  o = loadImage("../TicTacToe Images/o.png");
   //population
   gameSpaceX = appWidth*0;
   gameSpaceY = appHeight*0;
@@ -105,6 +109,16 @@ void draw() {
   if (x7 == true) image(x, appWidth*1.06/2, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (x8 == true) image(x, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (x9 == true) image(x, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
+  //
+  if (o1 == true) image(o, appWidth*1.06/2, appHeight*1/4, appHeight*1/6, appHeight*1/6);
+  if (o2 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4, appHeight*1/6, appHeight*1/6);
+  if (o3 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4, appHeight*1/6, appHeight*1/6);
+  if (o4 == true) image(o, appWidth*1.06/2, appHeight*1/4+appHeight*1/6, appHeight*1/6, appHeight*1/6);
+  if (o5 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*1/6, appHeight*1/6, appHeight*1/6);
+  if (o6 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*1/6, appHeight*1/6, appHeight*1/6);
+  if (o7 == true) image(o, appWidth*1.06/2, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
+  if (o8 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
+  if (o9 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
 } //End draw
 //
 void mousePressed() {
@@ -123,41 +137,122 @@ void mousePressed() {
 //
 void keyPressed() {
 //
-  if (key=='Q' || key=='q')
+println("s1: "+s1);
+println("turn: "+turn);
+if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
+{
+  if (s1 == false && (key=='Q' || key=='q'))
   {
     x1 = true;
+    s1 = true;
+    turn++;
   }
-  if (key=='W' || key=='w')
+  if (s2 == false && (key=='W' || key=='w'))
   {
     x2 = true;
+    s2 = true;
+    turn++;
   }
-  if (key=='E' || key=='e')
+  if (s3 == false && (key=='E' || key=='e'))
   {
     x3 = true;
+    s3 = true;
+    turn++;
   }
-  if (key=='A' || key=='a')
+  if (s4 == false && (key=='A' || key=='a'))
   {
     x4 = true;
+    s4 = true;
+    turn++;
   }
-  if (key=='S' || key=='s')
+  if (s5 == false && (key=='S' || key=='s'))
   {
     x5 = true;
+    s5 = true;
+    turn++;
   }
-  if (key=='D' || key=='d')
+  if (s6 == false && (key=='D' || key=='d'))
   {
     x6 = true;
+    s6 = true;
+    turn++;
   }
-  if (key=='Z' || key=='z')
+  if (s7 == false && (key=='Z' || key=='z'))
   {
     x7 = true;
+    s7 = true;
+    turn++;
   }
-  if (key=='X' || key=='x')
+  if (s8 == false && (key=='X' || key=='x'))
   {
     x8 = true;
+    s8 = true;
+    turn++;
   }
-  if (key=='C' || key=='c')
+  if (s9 == false && (key=='C' || key=='c'))
   {
     x9 = true;
+    s9 = true;
+    turn++;
+  }
+}
+  //o
+  if (turn == 2 || turn == 4 || turn == 6 || turn == 8)
+  {
+  if (s1 == false && (key=='T' || key=='t'))
+  {
+    o1 = true;
+    s1 = true;
+    turn++;
+  }
+  if (s2 == false && (key=='Y' || key=='y'))
+  {
+    o2 = true;
+    s2 = true;
+    turn++;
+  }
+  if (s3 == false && (key=='U' || key=='u'))
+  {
+    o3 = true;
+    s3 = true;
+    turn++;
+  }
+  if (s4 == false && (key=='G' || key=='g'))
+  {
+    o4 = true;
+    s4 = true;
+    turn++;
+  }
+  if (s5 == false && (key=='H' || key=='h'))
+  {
+    o5 = true;
+    s5 = true;
+    turn++;
+  }
+  if (s6 == false && (key=='J' || key=='j'))
+  {
+    o6 = true;
+    s6 = true;
+    turn++;
+  }
+  if (s7 == false && (key=='B' || key=='b'))
+  {
+    o7 = true;
+    s7 = true;
+    turn++;
+  }
+  if (s8 == false && (key=='N' || key=='n'))
+  {
+    o8 = true;
+    s8 = true;
+    turn++;
+  }
+  if (s9 == false && (key=='M' || key=='m'))
+  {
+    o9 = true;
+    s9 = true;
+    turn++;
+  }
   }
 //
 }//End keyPressed

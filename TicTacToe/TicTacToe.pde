@@ -13,12 +13,17 @@ boolean bestOfSelection = false;
 boolean x1 = false, x2 = false, x3 = false, x4 = false, x5 = false, x6 = false, x7 = false, x8 = false, x9;
 boolean o1 = false, o2 = false, o3 = false, o4 = false, o5 = false, o6 = false, o7 = false, o8 = false, o9;
 boolean s1 = false, s2 = false, s3 = false, s4 = false, s5 = false, s6 = false, s7 = false, s8 = false, s9;
+boolean xWin = false;
+boolean oWin = false;
 PImage x, o;
 int turn = 1;
 //PImage o = loadImage("../TicTacToe Images/o.png");
 //text variables
 String restart = "RESTART";
 String bestOfText = "Best Of: ";
+String tie = "TIE!";
+String winX = "X Wins!";
+String winO = "O Wins!";
 //
 void setup() {
   //
@@ -59,6 +64,8 @@ void setup() {
 void draw() {
   //
   //DIVs
+  fill(#8695A2);
+  rect(-2, -2, appWidth+4, appHeight+4); //bg
   fill(#FF8F1F);
   rect(gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight); //gameSpace
   fill(#FAE079);
@@ -119,6 +126,41 @@ void draw() {
   if (o7 == true) image(o, appWidth*1.06/2, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (o8 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (o9 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
+  //
+  //end game
+  if (turn == 10)
+  {
+    rect(appWidth/2-appWidth*1/10, appHeight/2-appHeight*1/10, appWidth*1/5, appHeight*1/5);
+    textDrawLarge(black, CENTER, CENTER, font, tie, 0, 0, appWidth, appHeight);
+  }
+  //x win
+  if (xWin==true)
+  {
+    rect(appWidth/2-appWidth*1/6, appHeight/2-appHeight*1/10, appWidth*1/3, appHeight*1/5);
+    textDrawLarge(black, CENTER, CENTER, font, winX, 0, 0, appWidth, appHeight);
+  }
+  if (x1==true && x2==true && x3==true) xWin=true;
+  if (x4==true && x5==true && x6==true) xWin=true;
+  if (x7==true && x8==true && x9==true) xWin=true;
+  if (x1==true && x4==true && x7==true) xWin=true;
+  if (x2==true && x5==true && x8==true) xWin=true;
+  if (x3==true && x6==true && x9==true) xWin=true;
+  if (x1==true && x5==true && x9==true) xWin=true;
+  if (x3==true && x5==true && x7==true) xWin=true;
+  //o win
+  if (oWin==true)
+  {
+    rect(appWidth/2-appWidth*1/6, appHeight/2-appHeight*1/10, appWidth*1/3, appHeight*1/5);
+    textDrawLarge(black, CENTER, CENTER, font, winO, 0, 0, appWidth, appHeight);
+  }
+  if (o1==true && o2==true && o3==true) oWin=true;
+  if (o4==true && o5==true && o6==true) oWin=true;
+  if (o7==true && o8==true && o9==true) oWin=true;
+  if (o1==true && o4==true && o7==true) oWin=true;
+  if (o2==true && o5==true && o8==true) oWin=true;
+  if (o3==true && o6==true && o9==true) oWin=true;
+  if (o1==true && o5==true && o9==true) oWin=true;
+  if (o3==true && o5==true && o7==true) oWin=true;
 } //End draw
 //
 void mousePressed() {
@@ -133,6 +175,27 @@ void mousePressed() {
   {
     bestOfSelection = false;
   }
+  //
+  if (xWin==true || oWin==true || turn==10)
+  {
+    xWin=false;
+    oWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    turn = 1;
+  }
+  //
+  if (mouseX>=restartX && mouseX<=restartX+restartWidth && mouseY>=restartY && mouseY<=restartHeight+restartY)
+  {
+    xWin=false;
+    oWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    turn = 1;
+  }
+  
 } //End mousePressed
 //
 void keyPressed() {

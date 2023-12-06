@@ -6,7 +6,7 @@ void textSetup() {
   String[] fontList = PFont.list(); //To list all fonts available on system
   printArray(fontList); //For listing all possible fonts to choos, then createFont
   //
-  font = createFont ("Trechubet MS", 396); //Verify font exists
+  font = createFont ("Tahoma", 389); //Verify font exists
   //Tools create Font / find font / DO NOT PRESS "OK", known bug
   //
 }//End text setup

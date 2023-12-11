@@ -104,6 +104,15 @@ void draw() {
     }
     }
   }
+  //win dot color
+  if (bestOf == 3)
+  {
+    if (xWins>0) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>1) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+  }
+  fill(#FAFAFA);
   rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player 1 title
   rect(appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20); //player 2 title
   rect(appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25); //player 1
@@ -201,6 +210,18 @@ void mousePressed() {
     turn = 1;
   }
   //
+  if (xMatchWin==true || oMatchWin==true)
+  {
+    xWin=false;
+    oWin=false;
+    xMatchWin=false;
+    oMatchWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    turn = 1;
+  }
+  //
   if (mouseX>=restartX && mouseX<=restartX+restartWidth && mouseY>=restartY && mouseY<=restartHeight+restartY)
   {
     xWin=false;
@@ -219,6 +240,18 @@ if (xWin==true || oWin==true || turn==10)
   {
     xWin=false;
     oWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    turn = 1;
+  }
+  //
+  if (xMatchWin==true || oMatchWin==true)
+  {
+    xWin=false;
+    oWin=false;
+    xMatchWin=false;
+    oMatchWin=false;
     x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
     o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
     s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;

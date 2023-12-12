@@ -105,12 +105,37 @@ void draw() {
     }
   }
   //win dot color
+  if (bestOf == 1)
+  {
+    if (xWins>0) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>0) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+  }
   if (bestOf == 3)
   {
     if (xWins>0) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
     if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
     if (xWins>1) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
     if (oWins>1) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+  }
+  if (bestOf == 5)
+  {
+    if (xWins>0) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>1) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>2) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>2) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+  }
+  if (bestOf == 7)
+  {
+    if (xWins>0) {fill(#0018AF);rect(appWidth*1.35/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>1) {fill(#D10000); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>2) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>2) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>3) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>3) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
   }
   fill(#FAFAFA);
   rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player 1 title
@@ -160,7 +185,7 @@ void draw() {
   if (o9 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   //
   //end game
-  if (turn == 10)
+  if (turn == 10 && xWin==false && oWin==false )
   {
     rect(appWidth/2-appWidth*1/10, appHeight/2-appHeight*1/10, appWidth*1/5, appHeight*1/5);
     textDrawLarge(black, CENTER, CENTER, font, tie, 0, 0, appWidth, appHeight);
@@ -214,6 +239,8 @@ void mousePressed() {
   {
     xWin=false;
     oWin=false;
+    xWins=0;
+    oWins=0;
     xMatchWin=false;
     oMatchWin=false;
     x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
@@ -230,6 +257,8 @@ void mousePressed() {
     o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
     s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
     turn = 1;
+    xWins=0;
+    oWins=0;
   }
   
 } //End mousePressed
@@ -250,6 +279,8 @@ if (xWin==true || oWin==true || turn==10)
   {
     xWin=false;
     oWin=false;
+    xWins=0;
+    oWins=0;
     xMatchWin=false;
     oMatchWin=false;
     x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;

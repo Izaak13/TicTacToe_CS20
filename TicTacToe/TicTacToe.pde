@@ -67,7 +67,6 @@ void setup() {
 } //End setup
 //
 void draw() {
-  //
   //DIVs
   fill(#676767);
   rect(-2, -2, appWidth+4, appHeight+4); //bg
@@ -136,7 +135,7 @@ void draw() {
     if (oWins>2) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
     if (xWins>3) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
     if (oWins>3) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
-  }
+  } 
   fill(#FAFAFA);
   rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player 1 title
   rect(appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20); //player 2 title
@@ -144,6 +143,8 @@ void draw() {
   rect(appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25); //player 2
   //
   image(crown, appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);
+  image(x, appWidth*1/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
+  image(o, appWidth*4/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
   //
   if ( bestOfSelection == true )
   {
@@ -260,7 +261,9 @@ void mousePressed() {
     xWins=0;
     oWins=0;
   }
-  
+  //
+  suggestionsWinOrBlock();
+  //
 } //End mousePressed
 //
 void keyPressed() {
@@ -426,5 +429,6 @@ if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
   if (o1==true && o5==true && o9==true) {oWin=true; oWins++; println("O Wins: "+oWins);}
   if (o3==true && o5==true && o7==true) {oWin=true; oWins++; println("O Wins: "+oWins);}
 //
+suggestionsWinOrBlock();
 }//End keyPressed
 //End MAIN Program

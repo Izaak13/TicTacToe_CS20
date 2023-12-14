@@ -64,6 +64,8 @@ void setup() {
   teamWidth = appWidth*1/10;
   teamHeight = teamWidth;
   //
+  println("Turn "+(turn)+" (X)");
+  //
 } //End setup
 //
 void draw() {
@@ -209,7 +211,6 @@ void draw() {
 } //End draw
 //
 void mousePressed() {
-  println("best of: "+bestOf);
   if (bestOfSelection == true)
   {
     if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight && mouseY<smallDimension*0.5/5+restartHeight*2) bestOf  = 1;
@@ -248,6 +249,7 @@ void mousePressed() {
     o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
     s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
     turn = 1;
+    println("Turn "+(turn)+" (X)");
   }
   //
   if (mouseX>=restartX && mouseX<=restartX+restartWidth && mouseY>=restartY && mouseY<=restartHeight+restartY)
@@ -260,6 +262,7 @@ void mousePressed() {
     turn = 1;
     xWins=0;
     oWins=0;
+    println("Turn "+(turn)+" (X)");
   }
   //
   suggestionsWinOrBlock();
@@ -276,6 +279,7 @@ if (xWin==true || oWin==true || turn==10)
     o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
     s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
     turn = 1;
+    
   }
   //
   if (xMatchWin==true || oMatchWin==true)
@@ -292,8 +296,6 @@ if (xWin==true || oWin==true || turn==10)
     turn = 1;
   }
   //
-println("s1: "+s1);
-println("turn: "+turn);
 if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
 {
   if (s1 == false && (key=='Q' || key=='q'))
@@ -429,6 +431,11 @@ if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
   if (o1==true && o5==true && o9==true) {oWin=true; oWins++; println("O Wins: "+oWins);}
   if (o3==true && o5==true && o7==true) {oWin=true; oWins++; println("O Wins: "+oWins);}
 //
+//turn
+if (turn == 1 || turn == 3 || turn == 5 || turn == 7 ) println("Turn "+(turn)+" (X)");
+if (turn == 2 || turn == 4 || turn == 6 || turn == 8 ) println("Turn "+(turn)+" (O)");
+//
 suggestionsWinOrBlock();
+//
 }//End keyPressed
 //End MAIN Program

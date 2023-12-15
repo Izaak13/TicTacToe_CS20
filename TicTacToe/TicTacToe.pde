@@ -10,15 +10,17 @@ float restartX, restartY, restartWidth, restartHeight;
 float teamWidth, teamHeight, widthSquare, heightSquare;
 int bestOf = 1;
 boolean bestOfSelection = false;
+boolean player2Selection = false;
 boolean x1 = false, x2 = false, x3 = false, x4 = false, x5 = false, x6 = false, x7 = false, x8 = false, x9;
 boolean o1 = false, o2 = false, o3 = false, o4 = false, o5 = false, o6 = false, o7 = false, o8 = false, o9;
 boolean s1 = false, s2 = false, s3 = false, s4 = false, s5 = false, s6 = false, s7 = false, s8 = false, s9;
 boolean xWin = false;
 boolean oWin = false;
-PImage x, o, crown;
+PImage x, o, crown, player, bot;
 int turn = 1;
 int oWins = 0;
 int xWins = 0;
+int AItype = 0;
 boolean xMatchWin = false;
 boolean oMatchWin = false;
 //PImage o = loadImage("../TicTacToe Images/o.png");
@@ -44,6 +46,8 @@ void setup() {
   x = loadImage("../TicTacToe Images/x.png");
   o = loadImage("../TicTacToe Images/o.png");
   crown = loadImage("../TicTacToe Images/crown.png");
+  player = loadImage("../TicTacToe Images/player.png");
+  bot = loadImage("../TicTacToe Images/bot.png");
   //population
   gameSpaceX = appWidth*0;
   gameSpaceY = appHeight*0;
@@ -69,6 +73,8 @@ void setup() {
 } //End setup
 //
 void draw() {
+  //functions
+  easyAI();
   //DIVs
   fill(#676767);
   rect(-2, -2, appWidth+4, appHeight+4); //bg
@@ -76,8 +82,11 @@ void draw() {
   rect(gameSpaceX, gameSpaceY, gameSpaceWidth, gameSpaceHeight); //gameSpace
   fill(#FAFAFA);
   rect(restartX, restartY, restartWidth, restartHeight); //restart
-  rect(appWidth*11/20, appHeight*1/20, teamWidth, teamHeight);
+  fill(#79C6FF);
+  rect(appWidth*11/20, appHeight*1/20, teamWidth, teamHeight); //team icons
+  fill(#F24C57);
   rect(appWidth*11/20, appHeight*16/20, teamWidth, teamHeight);
+  fill(#FAFAFA);
   //rect(appWidth*1.06/2, appHeight*1/4, appHeight*1/2, appHeight*1/2); //board 
     rect(appWidth*1.06/2, appHeight*1/4, appHeight*1/6, appHeight*1/6);
     rect(appWidth*1.06/2+appHeight*1/6, appHeight*1/4, appHeight*1/6, appHeight*1/6);
@@ -108,45 +117,47 @@ void draw() {
   //win dot color
   if (bestOf == 1)
   {
-    if (xWins>0) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
-    if (oWins>0) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (xWins>0) {fill(#79C6FF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>0) {fill(#F24C57); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
   }
   if (bestOf == 3)
   {
-    if (xWins>0) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>1) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
-    if (oWins>1) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (xWins>0) {fill(#79C6FF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#79C6FF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>1) {fill(#F24C57); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
   }
   if (bestOf == 5)
   {
-    if (xWins>0) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>1) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>1) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>2) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
-    if (oWins>2) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (xWins>0) {fill(#79C6FF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#79C6FF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>1) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>2) {fill(#79C6FF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>2) {fill(#F24C57); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
   }
   if (bestOf == 7)
   {
-    if (xWins>0) {fill(#0018AF);rect(appWidth*1.35/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>0) {fill(#D10000); rect(appWidth*2.3/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>1) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>1) {fill(#D10000); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>2) {fill(#0018AF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (oWins>2) {fill(#D10000); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
-    if (xWins>3) {fill(#0018AF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
-    if (oWins>3) {fill(#D10000); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (xWins>0) {fill(#79C6FF);rect(appWidth*1.35/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>0) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*8.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>1) {fill(#79C6FF); rect(appWidth*1.35/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>1) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*7/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>2) {fill(#79C6FF); rect(appWidth*1.35/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (oWins>2) {fill(#F24C57); rect(appWidth*2.3/10, appHeight*5.5/20+appHeight*1/5, appWidth*1/30, appWidth*1/30);}
+    if (xWins>3) {fill(#79C6FF); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
+    if (oWins>3) {fill(#F24C57); rect(appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);}
   } 
   fill(#FAFAFA);
-  rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player 1 title
-  rect(appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20); //player 2 title
-  rect(appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25); //player 1
-  rect(appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25); //player 2
+  rect(appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20); //player X title
+  rect(appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20); //player O title
+  rect(appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25); //team X
+  rect(appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25); //team O
   //
   image(crown, appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);
   image(x, appWidth*1/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
   image(o, appWidth*4/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
+  image(player, appWidth*11/20, appHeight*1/20, teamWidth, teamHeight);
+  image(bot, appWidth*11/20+teamWidth*0.1, appHeight*16/20+teamWidth*0.1, teamWidth*0.8, teamHeight*0.8);
   //
   if ( bestOfSelection == true )
   {
@@ -155,15 +166,37 @@ void draw() {
     rect(restartX, smallDimension*0.5/5+restartHeight*3, restartWidth, restartHeight);
     rect(restartX, smallDimension*0.5/5+restartHeight*4, restartWidth, restartHeight);
   }
+  //
+  if ( player2Selection == true )
+  {
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
+  }
   //text
   textDrawMedium(black, CENTER, CENTER, font, restart, restartX, restartY-appHeight*1/100, restartWidth, restartHeight);
   textDrawMedSmall(black, CENTER, CENTER, font, bestOfText+String.valueOf(bestOf), restartX, smallDimension*0.5/5, restartWidth, restartHeight);
+  textDrawTiny(black, CENTER, CENTER, font, "Team X", appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25);
+  textDrawTiny(black, CENTER, CENTER, font, "Team O", appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25);
+  textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20);
+  textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20);
   if (bestOfSelection == true)
   {
     textDrawMedSmall(black, CENTER, CENTER, font, "One", restartX, smallDimension*0.5/5+restartHeight, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Three", restartX, smallDimension*0.5/5+restartHeight*2, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Five", restartX, smallDimension*0.5/5+restartHeight*3, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Seven", restartX, smallDimension*0.5/5+restartHeight*4, restartWidth, restartHeight);
+  }
+  //
+  if ( player2Selection == true )
+  {
+    textDrawSmall(black, CENTER, CENTER, font, "Impossible", appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Hard", appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Normal", appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Easy", appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
   }
   //
   //gameplay
@@ -214,9 +247,20 @@ void mousePressed() {
   if (bestOfSelection == true)
   {
     if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight && mouseY<smallDimension*0.5/5+restartHeight*2) bestOf  = 1;
-    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*2 && mouseY<smallDimension*0.5/5+restartHeight*3) bestOf  = 3;
-    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*3 && mouseY<smallDimension*0.5/5+restartHeight*4) bestOf  = 5;
-    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*4 && mouseY<smallDimension*0.5/5+restartHeight*5) bestOf  = 7;
+    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*2 && mouseY<smallDimension*0.5/5+restartHeight*3) bestOf  = 3; 
+    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*3 && mouseY<smallDimension*0.5/5+restartHeight*4) bestOf  = 5; 
+    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight*4 && mouseY<smallDimension*0.5/5+restartHeight*5) bestOf  = 7; 
+    if (mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5+restartHeight && mouseY<smallDimension*0.5/5+restartHeight*5)
+    {
+    xWin=false;
+    oWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    xWins=0;
+    oWins=0;
+    turn = 1;
+    }
   }
   if ( mouseX>restartX && mouseX<restartX+restartWidth && mouseY>smallDimension*0.5/5 && mouseY<smallDimension*0.5/5+restartHeight)
   {
@@ -263,6 +307,15 @@ void mousePressed() {
     xWins=0;
     oWins=0;
     println("Turn "+(turn)+" (X)");
+  }
+  //
+  if (mouseX>=appWidth*6.7/10 && mouseX<=appWidth*6.7/10+appWidth*1/6 && mouseY>=appHeight*16/20 && mouseY<=appHeight*16/20+appHeight*1/20)
+  {
+    player2Selection=true;
+  }
+  else
+  {
+    player2Selection=false;
   }
   //
   suggestionsWinOrBlock();
@@ -433,8 +486,9 @@ if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
 //
 //turn
 if (turn == 1 || turn == 3 || turn == 5 || turn == 7 ) println("Turn "+(turn)+" (X)");
-if (turn == 2 || turn == 4 || turn == 6 || turn == 8 ) println("Turn "+(turn)+" (O)");
+if (turn == 2 || turn == 4 || turn == 6 || turn == 8 || turn == 9) println("Turn "+(turn)+" (O)");
 //
+
 suggestionsWinOrBlock();
 //
 }//End keyPressed

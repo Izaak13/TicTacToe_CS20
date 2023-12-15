@@ -24,7 +24,7 @@ void textSetup() {
     void textDrawSmall( color ink, int alignX, int alignY, PFont font, String text, float rectX, float rectY, float rectWidth, float rectHeight) {
   fill( ink ); //Ink, hexadecimal
   textAlign ( alignX, alignY ); //Align X&Y
-  float size = appWidth*1/35;
+  float size = appWidth*1/42;
   //println(size);
   textFont(font, size); //Change the number until it fits, largest font size
   text( text, rectX, rectY, rectWidth, rectHeight );
@@ -54,7 +54,7 @@ void textSetup() {
   void textDrawTiny( color ink, int alignX, int alignY, PFont font, String text, float rectX, float rectY, float rectWidth, float rectHeight) {
   fill( ink ); //Ink, hexadecimal
   textAlign ( alignX, alignY ); //Align X&Y
-  float size = appWidth*1/42;
+  float size = appWidth*1/50;
   //println(size);
   textFont(font, size); //Change the number until it fits, largest font size
   text( text, rectX, rectY, rectWidth, rectHeight );

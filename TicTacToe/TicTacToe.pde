@@ -30,6 +30,7 @@ String bestOfText = "Best Of: ";
 String tie = "TIE!";
 String winX = "X Wins!";
 String winO = "O Wins!";
+String player2;
 //
 void setup() {
   //
@@ -156,8 +157,9 @@ void draw() {
   image(crown, appWidth*1.5/10, appHeight*1/3.5, appWidth*1/10, appWidth*1/10);
   image(x, appWidth*1/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
   image(o, appWidth*4/15, appHeight*1/3.2, appWidth*1/15, appWidth*1/15);
-  image(player, appWidth*11/20, appHeight*1/20, teamWidth, teamHeight);
-  image(bot, appWidth*11/20+teamWidth*0.1, appHeight*16/20+teamWidth*0.1, teamWidth*0.8, teamHeight*0.8);
+  image(player, appWidth*11/20+teamWidth*0.1, appHeight*1/20+teamWidth*0.1, teamWidth*0.8, teamHeight*0.8);
+  if (AItype>0) image(bot, appWidth*11/20+teamWidth*0.12, appHeight*16/20+teamWidth*0.12, teamWidth*0.76, teamHeight*0.76);
+  else image(player, appWidth*11/20+teamWidth*0.1, appHeight*16/20+teamWidth*0.1, teamWidth*0.8, teamHeight*0.8);
   //
   if ( bestOfSelection == true )
   {
@@ -166,37 +168,24 @@ void draw() {
     rect(restartX, smallDimension*0.5/5+restartHeight*3, restartWidth, restartHeight);
     rect(restartX, smallDimension*0.5/5+restartHeight*4, restartWidth, restartHeight);
   }
-  //
-  if ( player2Selection == true )
-  {
-    rect(appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
-    rect(appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
-    rect(appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
-    rect(appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
-    rect(appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
-  }
   //text
   textDrawMedium(black, CENTER, CENTER, font, restart, restartX, restartY-appHeight*1/100, restartWidth, restartHeight);
   textDrawMedSmall(black, CENTER, CENTER, font, bestOfText+String.valueOf(bestOf), restartX, smallDimension*0.5/5, restartWidth, restartHeight);
   textDrawTiny(black, CENTER, CENTER, font, "Team X", appWidth*6.7/10, appHeight*2.5/20, appWidth*1/7, appHeight*1/25);
   textDrawTiny(black, CENTER, CENTER, font, "Team O", appWidth*6.7/10, appHeight*17.5/20, appWidth*1/7, appHeight*1/25);
   textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*1/20, appWidth*1/6, appHeight*1/20);
-  textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20);
+  if (AItype == 0) player2 = "Player";
+  if (AItype == 1) player2 = "Bot (Easy)";
+  if (AItype == 2) player2 = "Bot (Normal)";
+  if (AItype == 3) player2 = "Bot (Hard)";
+  if (AItype == 4) player2 = "Impossi-bot";
+  textDrawSmall(black, CENTER, CENTER, font, player2, appWidth*6.7/10, appHeight*16/20, appWidth*1/6, appHeight*1/20);
   if (bestOfSelection == true)
   {
     textDrawMedSmall(black, CENTER, CENTER, font, "One", restartX, smallDimension*0.5/5+restartHeight, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Three", restartX, smallDimension*0.5/5+restartHeight*2, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Five", restartX, smallDimension*0.5/5+restartHeight*3, restartWidth, restartHeight);
     textDrawMedSmall(black, CENTER, CENTER, font, "Seven", restartX, smallDimension*0.5/5+restartHeight*4, restartWidth, restartHeight);
-  }
-  //
-  if ( player2Selection == true )
-  {
-    textDrawSmall(black, CENTER, CENTER, font, "Impossible", appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
-    textDrawSmall(black, CENTER, CENTER, font, "Hard", appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
-    textDrawSmall(black, CENTER, CENTER, font, "Normal", appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
-    textDrawSmall(black, CENTER, CENTER, font, "Easy", appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
-    textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
   }
   //
   //gameplay
@@ -219,6 +208,24 @@ void draw() {
   if (o7 == true) image(o, appWidth*1.06/2, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (o8 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (o9 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
+  //
+  if ( player2Selection == true )
+  {
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
+    rect(appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
+  }
+  //
+  if ( player2Selection == true )
+  {
+    textDrawSmall(black, CENTER, CENTER, font, "Impossible", appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Hard", appWidth*6.7/10, appHeight*16/20-appHeight*2/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Normal", appWidth*6.7/10, appHeight*16/20-appHeight*3/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Easy", appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
+    textDrawSmall(black, CENTER, CENTER, font, "Player", appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
+  }
   //
   //end game
   if (turn == 10 && xWin==false && oWin==false )
@@ -307,6 +314,27 @@ void mousePressed() {
     xWins=0;
     oWins=0;
     println("Turn "+(turn)+" (X)");
+  }
+  //
+  if (player2Selection == true)
+  {//appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*1/20 && mouseY<appHeight*16/20-appHeight*1/20+appHeight*1/20) AItype  = 4;
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*2/20 && mouseY<appHeight*16/20-appHeight*2/20+appHeight*1/20) AItype  = 3;
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*3/20 && mouseY<appHeight*16/20-appHeight*3/20+appHeight*1/20) AItype  = 2;
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*4/20 && mouseY<appHeight*16/20-appHeight*4/20+appHeight*1/20) AItype  = 1;
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*5/20 && mouseY<appHeight*16/20-appHeight*5/20+appHeight*1/20) AItype  = 0;
+    println("AI "+AItype);    
+    if (mouseX>appWidth*6.7/10 && mouseX<appWidth*6.7/10+appWidth*1/6 && mouseY>appHeight*16/20-appHeight*5/20 && mouseY<appHeight*16/20-appHeight*1/20+appHeight*1/20)
+    {
+    xWin=false;
+    oWin=false;
+    x1 = false; x2 = false; x3 = false; x4 = false; x5 = false; x6 = false; x7 = false; x8 = false; x9 = false;
+    o1 = false; o2 = false; o3 = false; o4 = false; o5 = false; o6 = false; o7 = false; o8 = false; o9 = false;
+    s1 = false; s2 = false; s3 = false; s4 = false; s5 = false; s6 = false; s7 = false; s8 = false; s9 = false;
+    xWins=0;
+    oWins=0;
+    turn = 1;
+    }
   }
   //
   if (mouseX>=appWidth*6.7/10 && mouseX<=appWidth*6.7/10+appWidth*1/6 && mouseY>=appHeight*16/20 && mouseY<=appHeight*16/20+appHeight*1/20)
@@ -406,6 +434,8 @@ if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
     turn++;
   }
 }
+if (AItype==0)
+{
   //o
   if (turn == 2 || turn == 4 || turn == 6 || turn == 8)
   {
@@ -464,6 +494,7 @@ if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9)
     turn++;
   }
   }
+}
   //winning
   //x
   if (x1==true && x2==true && x3==true) {xWin=true; xWins++; println("X Wins: "+xWins);}

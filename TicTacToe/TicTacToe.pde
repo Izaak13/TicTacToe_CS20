@@ -209,6 +209,7 @@ void draw() {
   if (o8 == true) image(o, appWidth*1.06/2+appHeight*1/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   if (o9 == true) image(o, appWidth*1.06/2+appHeight*2/6, appHeight*1/4+appHeight*2/6, appHeight*1/6, appHeight*1/6);
   //
+  fill(#C9C9C9);
   if ( player2Selection == true )
   {
     rect(appWidth*6.7/10, appHeight*16/20-appHeight*1/20, appWidth*1/6, appHeight*1/20);
@@ -217,6 +218,7 @@ void draw() {
     rect(appWidth*6.7/10, appHeight*16/20-appHeight*4/20, appWidth*1/6, appHeight*1/20);
     rect(appWidth*6.7/10, appHeight*16/20-appHeight*5/20, appWidth*1/6, appHeight*1/20);
   }
+  fill(#FFFFFF);
   //
   if ( player2Selection == true )
   {
@@ -516,8 +518,8 @@ if (AItype==0)
   if (o3==true && o5==true && o7==true) {oWin=true; oWins++; println("O Wins: "+oWins);}
 //
 //turn
-if (turn == 1 || turn == 3 || turn == 5 || turn == 7 ) println("Turn "+(turn)+" (X)");
-if (turn == 2 || turn == 4 || turn == 6 || turn == 8 || turn == 9) println("Turn "+(turn)+" (O)");
+if (turn == 1 || turn == 3 || turn == 5 || turn == 7 || turn == 9) println("Turn "+(turn)+" (X)");
+if (turn == 2 || turn == 4 || turn == 6 || turn == 8 ) println("Turn "+(turn)+" (O)");
 //
 
 suggestionsWinOrBlock();

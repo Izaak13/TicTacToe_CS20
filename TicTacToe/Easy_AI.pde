@@ -4,7 +4,7 @@ if (AItype == 1)
 {
   if (turn == 2)
   {
-    random();
+    //random();
   }
 }
 //
